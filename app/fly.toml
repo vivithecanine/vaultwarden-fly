@@ -20,7 +20,7 @@ processes = []
   USER_ATTACHMENT_LIMIT = "0"
   WEBSOCKET_ADDRESS = "::"
   WEBSOCKET_ENABLED = "true"
-  WEB_VAULT_ENABLED = "f"
+  WEB_VAULT_ENABLED = "true"
 
 [experimental]
   allowed_public_ports = []
