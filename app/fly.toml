@@ -5,7 +5,7 @@ kill_timeout = 5
 processes = []
 
 [build]
-  image = "vaultwarden/server@sha256:7011d4216a00fcd79785b8b31d61b897e05d959aa37681323dd9c0155655bbbc"
+  image = "vaultwarden/server@sha256:d73b431499dfd9c916f5d820eccdb13752366b1fb5ecdbb2d9ed86119ebc9271"
 
 [env]
   DOMAIN = "https://<your proxy app name>.fly.dev"
