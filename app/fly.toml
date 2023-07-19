@@ -4,8 +4,9 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
+# https://hub.docker.com/layers/vaultwarden/server/1.29.0-alpine/images/sha256-e95965c97709845425bcdb78701c1020c801302206611431914f6c9be9c6467b?context=explore
 [build]
-  image = "vaultwarden/server@sha256:d73b431499dfd9c916f5d820eccdb13752366b1fb5ecdbb2d9ed86119ebc9271"
+  image = "vaultwarden/server@sha256:e95965c97709845425bcdb78701c1020c801302206611431914f6c9be9c6467b"
 
 [env]
   DOMAIN = "https://<your proxy app name>.fly.dev"
