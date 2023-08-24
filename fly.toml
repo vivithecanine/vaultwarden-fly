@@ -1,0 +1,52 @@
+app = "<your-app-name>"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[experimental]
+  auto_rollback = true
+
+[build]
+  # https://github.com/dani-garcia/vaultwarden/pkgs/container/vaultwarden
+  image = "ghcr.io/dani-garcia/vaultwarden@sha256:a2f416af27e08a381dd29bbc7d0360fc4788b70b88bf6512f1082fd78e2e1fbe"
+
+[env]
+  DOMAIN = "https://<your-app-name>.fly.dev"
+  IP_HEADER = "X-Forwarded-For"
+  I_REALLY_WANT_VOLATILE_STORAGE = "true"
+  ORG_ATTACHMENT_LIMIT = "0"
+  ORG_CREATION_USERS = "none"
+  PASSWORD_ITERATIONS = "600000"
+  SENDS_ALLOWED = "f"
+  SIGNUPS_ALLOWED = "f"
+  USER_ATTACHMENT_LIMIT = "0"
+
+[[mounts]]
+  source = "vaultwarden"
+  destination = "/data"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 80
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.http_checks]]
+    interval = "10s"
+    timeout = "2s"
+    grace_period = "5s"
+    method = "get"
+    path = "/alive"
+    protocol = "http"
+    tls_skip_verify = false
